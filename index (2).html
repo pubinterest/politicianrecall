@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>국회의원 랜덤 소환기</title>
+  <style>
+    body {
+      font-family: 'Pretendard', sans-serif;
+      text-align: center;
+      background-color: #f8f8f8;
+      padding: 50px;
+    }
+    .container {
+      background: white;
+      border-radius: 16px;
+      padding: 30px;
+      max-width: 500px;
+      margin: auto;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+    button {
+      font-size: 18px;
+      padding: 12px 24px;
+      margin-top: 20px;
+      border: none;
+      border-radius: 8px;
+      background-color: #1da1f2;
+      color: white;
+      cursor: pointer;
+    }
+    #result {
+      margin-top: 30px;
+      font-size: 22px;
+      line-height: 1.6;
+    }
+    .sub {
+      color: #666;
+      font-size: 14px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🧨 랜덤 국회의원 소환기</h1>
+    <p>오늘 당신이 소환할 국회의원을 뽑아드립니다.</p>
+    <button onclick="summon()">소환하기</button>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    const politicians = [
+      "김민수", "박영희", "이철수", "정은주", "홍길동", "이영자", "최무성", "강민정",
+      "조국", "한동훈", "유승민", "이재명", "윤석열", "심상정", "홍준표"
+    ];
+
+    const reasons = [
+      "출석률 30% 이하", "막말 시전 마스터", "누구였더라… 기억 안 남", 
+      "민원 응답률 0%", "성비위 의혹", "법안 발의 0건", "상임위 불참률 80%",
+      "국민 무시 발언", "갑질 전과", "SNS 실언 반복"
+    ];
+
+    function summon() {
+      const name = politicians[Math.floor(Math.random() * politicians.length)];
+      const reason = reasons[Math.floor(Math.random() * reasons.length)];
+
+      const tweet = `오늘 나는 "${name}" 의원을 소환합니다. 이유: ${reason} 👇너도 소환해봐 👉 https://pubinterest.github.io/politician-rating/`;
+      const tweetUrl = "https://twitter.com/intent/tweet?text=" + encodeURIComponent(tweet);
+
+      document.getElementById("result").innerHTML = `
+        <strong>오늘 당신이 소환할 국회의원은<br>“${name}” 입니다.</strong><br>
+        🔥 소환 사유: <em>${reason}</em><br><br>
+        <a href="${tweetUrl}" target="_blank">
+          <button>트윗으로 공유하기</button>
+        </a>
+        <div class="sub">#국민소환제도입 #소환챌린지</div>
+      `;
+    }
+  </script>
+</body>
+</html>
